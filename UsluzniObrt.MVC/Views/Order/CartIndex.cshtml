@@ -1,0 +1,46 @@
+﻿@model UsluzniObrt.MVC.ViewModels.CartIndexViewModel
+
+@{
+    ViewBag.Title = "Sports Store: Your Cart";
+}
+<body>
+
+    <h2>Your cart</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Quantity</th>
+                <th>Item</th>
+                <th class="text-right">Price</th>
+                <th class="text-right">Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Cart.OrderList)
+            {
+                <tr>
+                    <td class="text-center">@item.Qty</td>
+                    <td class="text-left">@item.Item.Naziv</td>
+                    <td class="text-right">@item.Item.Cijena.ToString("c")</td>
+                    <td class="text-right">
+                        @((item.Qty * item.Item.Cijena).ToString("c"))
+                    </td>
+                    <td>@Html.ActionLink("Remove", "RemoveFromCart", new { id = item.Item.ItemId })</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-right">Total:</td>
+                <td class="text-right">@Model.Cart.Calculate().ToString("c")</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div class="text-center">
+        @Html.ActionLink("Back To Menu", "Index")
+    </div>
+    <div class="text-center">
+        @Html.ActionLink("Create Order", "CreateOrder")
+    </div>
+</body>

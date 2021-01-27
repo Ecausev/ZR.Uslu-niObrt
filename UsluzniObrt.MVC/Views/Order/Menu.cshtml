@@ -1,0 +1,39 @@
+﻿@model UsluzniObrt.MVC.ViewModels.ItemsViewModel
+@{
+    ViewBag.Title = "CreateItem";
+}
+<body>
+
+    @Html.AntiForgeryToken()
+
+    @foreach (var s in ViewBag.CategoryList)
+    {
+        <p>
+            <button class="btn btn-primary btn-lg btn-block " data-toggle="collapse" href="#@s.Name" role="button" aria-expanded="false" aria-controls="@s.Name">@s.Name</button>
+            <div class="row justify-content-center">
+                <div class="col">
+                    <div class="collapse multi-collapse" id="@s.Name">
+                        <div class="card card-body">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    @foreach (var item in Model.Items.Where(x => x.CategoryId == s.CategoryId))
+                                    {
+                                    <tr>
+                                        <td class="text-center text-capitalize">@item.Naziv</td>
+                                        <td class="text-center text-capitalize">@item.Cijena.ToString("0.00 Kn")</td>
+                                        <td class="text-center">@Html.ActionLink("Order", "AddToCart", new { id = item.ItemId }, new { @class = "btn btn-primary" })</td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </p>
+    }
+</body>
+
+@*check status of last order for that table. if status == aktivan, id =
+
+Korištenje modala za kreiranje tablice narudžbe! *@

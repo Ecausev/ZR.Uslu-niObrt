@@ -1,0 +1,44 @@
+﻿@model UsluzniObrt.MVC.ViewModels.ItemsViewModel
+@{
+    ViewBag.Title = "CreateItem";
+}
+<body>
+
+    @Html.AntiForgeryToken()
+
+    @foreach (var s in ViewBag.CategoryList)
+    {
+        <p>
+            <button class="btn btn-primary btn-lg btn-block " data-toggle="collapse" href="#@s.Name" role="button" aria-expanded="false" aria-controls="@s.Name">@s.Name</button>
+            <div class="row justify-content-center">
+                <div class="col">
+                    <div class="collapse multi-collapse" id="@s.Name">
+                        <div class="card card-body">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>@Html.DisplayNameFor(m => m.Naziv)</th>
+                                        <th>@Html.DisplayNameFor(m => m.Cijena)</th>
+                                        <th>Action(s)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Items.Where(x => x.CategoryId == s.CategoryId))
+                                    {
+                                        <tr>
+                                            <td>@item.Naziv</td>
+                                            <td>@item.Cijena</td>
+                                            <td>
+                                                @Html.ActionLink("Edit", "Edit", new { id = item.ItemId }, new { @class = "btn btn-primary" })
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </p>
+    }
+</body>
