@@ -13,7 +13,7 @@ namespace UsluzniObrt.Repository.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202101281806537_1"; }
+            get { return "202101281846423_1"; }
         }
         
         string IMigrationMetadata.Source

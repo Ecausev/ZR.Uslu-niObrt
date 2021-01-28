@@ -78,11 +78,15 @@
     <Compile Include="BaseRepository.cs" />
     <Compile Include="Category\CategoryRepository.cs" />
     <Compile Include="Category\ICategoryRepository.cs" />
-    <Compile Include="Item\IItemRepository.cs" />
-    <Compile Include="Item\ItemRepository.cs" />
-    <Compile Include="Migrations\202101281806537_1.cs" />
-    <Compile Include="Migrations\202101281806537_1.Designer.cs">
-      <DependentUpon>202101281806537_1.cs</DependentUpon>
+    <Compile Include="Menu\IMenuItemRepository.cs" />
+    <Compile Include="Menu\MenuItemRepository.cs" />
+    <Compile Include="Migrations\202101281846423_1.cs" />
+    <Compile Include="Migrations\202101281846423_1.Designer.cs">
+      <DependentUpon>202101281846423_1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101281850039_2.cs" />
+    <Compile Include="Migrations\202101281850039_2.Designer.cs">
+      <DependentUpon>202101281850039_2.cs</DependentUpon>
     </Compile>
     <Compile Include="Order\IOrderItemRepository.cs" />
     <Compile Include="Order\IOrderRepository.cs" />
@@ -108,12 +112,13 @@
       <Name>UsluzniObrt.Model</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Menu\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202101281806537_1.resx">
-      <DependentUpon>202101281806537_1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202101281846423_1.resx">
+      <DependentUpon>202101281846423_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101281850039_2.resx">
+      <DependentUpon>202101281850039_2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
