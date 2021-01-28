@@ -80,6 +80,10 @@
     <Compile Include="Category\ICategoryRepository.cs" />
     <Compile Include="Item\IItemRepository.cs" />
     <Compile Include="Item\ItemRepository.cs" />
+    <Compile Include="Migrations\202101281806537_1.cs" />
+    <Compile Include="Migrations\202101281806537_1.Designer.cs">
+      <DependentUpon>202101281806537_1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Order\IOrderItemRepository.cs" />
     <Compile Include="Order\IOrderRepository.cs" />
     <Compile Include="Order\OrderItemRepository.cs" />
@@ -106,6 +110,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Menu\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202101281806537_1.resx">
+      <DependentUpon>202101281806537_1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -12,16 +12,16 @@ namespace UsluzniObrt.MVC.Controllers
 {
     public class ItemController : Controller
     {
-        private readonly IItemService _itemService;
+        private readonly IMenuService _menuService;
         private readonly ICategoryService _categoryService;
         // GET: Item
         public ItemController()
         {
 
         }
-        public ItemController(IItemService itemService, ICategoryService categoryService)
+        public ItemController(IMenuService menuService, ICategoryService categoryService)
         {
-            _itemService = itemService;
+            _menuService = menuService;
             _categoryService = categoryService;
         }
         [HttpGet]
@@ -30,7 +30,7 @@ namespace UsluzniObrt.MVC.Controllers
 
             PopulateDropdownList();
             var model = new ItemsViewModel();
-            model.Items = _itemService.GetAll();
+            model.Items = _menuService.GetAll();
             return View(model);
 
         }
@@ -50,11 +50,11 @@ namespace UsluzniObrt.MVC.Controllers
                 PopulateDropdownList();
                 return View(model);
             }
-            _itemService.Add(new ItemCreate
+            _menuService.Add(new MenuItem
             {
                 CategoryId = model.CategoryId,
-                Naziv = model.Naziv,
-                Cijena = model.Cijena
+                Name = model.Naziv,
+                Price = model.Cijena
             });
 
             return RedirectToAction("Index", "Order");

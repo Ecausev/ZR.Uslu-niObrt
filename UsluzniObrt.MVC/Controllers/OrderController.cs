@@ -12,31 +12,22 @@ namespace UsluzniObrt.MVC.Controllers
 {
     public class OrderController : Controller
     {
-        private readonly IItemService _itemService;
+        private readonly IMenuService _MenuService;
         private readonly ICategoryService _categoryService;
         private readonly IOrderService _orderService;
-        private readonly IOfficeService _officeService;
-        private readonly ITableService _tableService;
-        private readonly IOrderItemService _orderItemService;
         // GET: Item
         public OrderController()
         {
 
         }
         public OrderController(
-            IItemService itemService, 
+            IMenuService itemService, 
             ICategoryService categoryService, 
-            IOrderService orderService, 
-            IOfficeService officeService, 
-            ITableService tableService,
-            IOrderItemService orderItemService)
+            IOrderService orderService )
         {
-            _itemService = itemService;
+            _MenuService = itemService;
             _categoryService = categoryService;
             _orderService = orderService;
-            _officeService = officeService;
-            _tableService = tableService;
-            _orderItemService = orderItemService;
         }
 
         
@@ -46,7 +37,7 @@ namespace UsluzniObrt.MVC.Controllers
             //PopulateViewBagOrder(OfficeId, TableId);
             PopulateDropdownList();
             var model = new ItemsViewModel();
-            model.Items = _itemService.GetAll();
+            model.Items = _MenuService.GetAll();
             return View(model);
         }
 
@@ -54,7 +45,7 @@ namespace UsluzniObrt.MVC.Controllers
         [AllowAnonymous]
         public ActionResult AddToCart(int id)
         {
-            var item = _itemService.GetById(id);
+            var item = _MenuService.GetById(id);
             GetCart().AddItem(item, 1);
             return RedirectToAction("Checkout", "Order");
         }
@@ -77,7 +68,7 @@ namespace UsluzniObrt.MVC.Controllers
 
         public ActionResult RemoveFromCart( int id)
         {
-            var item = _itemService.GetById(id);
+            var item = _MenuService.GetById(id);
             GetCart().RemoveItem(item);
             return RedirectToAction("Checkout", "Order");
         }

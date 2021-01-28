@@ -8,6 +8,6 @@ namespace UsluzniObrt.MVC.ViewModels
 {
     public class ItemsViewModel : ItemViewModel
     {
-        public List<Item> Items { get; set; }
+        public List<MenuItem> Items { get; set; }
     }
 }

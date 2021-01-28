@@ -13,14 +13,14 @@ namespace UsluzniObrt.MVC.Controllers
     
     public class AdminController : Controller
     {
-        private readonly IItemService _itemService;
+        private readonly IMenuService _menuService;
         private readonly ICategoryService _categoryService;
         public AdminController()
         {
         }
-        public AdminController(IItemService itemService, ICategoryService categoryService)
+        public AdminController(IMenuService menuService, ICategoryService categoryService)
         {
-            _itemService = itemService;
+            _menuService = menuService;
             _categoryService = categoryService;
         }
 
@@ -56,11 +56,11 @@ namespace UsluzniObrt.MVC.Controllers
                 PopulateDropdownList();
                 return View(model);
             }
-            _itemService.Add(new ItemCreate
+            _menuService.Add(new MenuItem
             {
                 CategoryId = model.CategoryId,
-                Naziv = model.Naziv,
-                Cijena = model.Cijena
+                Name = model.Naziv,
+                Price = model.Cijena
             });
 
              return RedirectToAction("Index", "Order");

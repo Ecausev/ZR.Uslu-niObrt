@@ -38,26 +38,20 @@ namespace UsluzniObrt.MVC.DependencyResolution {
 					scan.With(new ControllerConvention());
                 });
             For<IAuthenticationManager>().Use(() => HttpContext.Current.GetOwinContext().Authentication);
-            For<IUserStore<User>>().Use<UserStore<User>>();
+            For<IUserStore<IdentityUser>>().Use<UserStore<IdentityUser>>();
             For<IRoleStore<IdentityRole, string>>().Use<RoleStore<IdentityRole>>();
             For<DbContext>().Use<UsluzniObrtDbContext>();
 
             
 
             For<IUserService>().Use<UserService>();
-            For<IOfficeService>().Use<OfficeService>();
-            For<IOfficeRepository>().Use<OfficeRepository>();
             For<IUserRepository>().Use<UserRepository>();
-            For<IItemRepository>().Use<ItemRepository>();
+            For<IMenuitemRepository>().Use<MenuItemRepository>();
             For<ICategoryRepository>().Use<CategoryRepository>();
-            For<IItemService>().Use<ItemService>();
             For<ICategoryService>().Use<CategoryService>();
-            For<ITableService>().Use<TableService>();
             For<IOrderService>().Use<OrderService>();
             For<IOrderRepository>().Use<OrderRepository>();
-            For<ITableRepository>().Use<TableRepository>();
             For<IOrderItemRepository>().Use<OrderItemRepository>();
-            For<IOrderItemService>().Use<OrderItemService>();
 
             //For<>().Use<>();
             //For<>().Use<>();

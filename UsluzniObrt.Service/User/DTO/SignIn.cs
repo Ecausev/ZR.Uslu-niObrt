@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace UsluzniObrt.Model
 {
     /// <summary>
-    /// Tablica ? za login
+    /// DTO za SIGNIN
     /// </summary>
     public class SignIn
     {

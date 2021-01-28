@@ -16,18 +16,18 @@ namespace UsluzniObrt.MVC
             // Configure the db context, user manager and signin manager to use a single instance per request
             app.CreatePerOwinContext(UsluzniObrtDbContext.Create);
             app.CreatePerOwinContext<UserManager>(UserManager.Create);
-            app.CreatePerOwinContext<SignInManager>(SignInManager.Create);
-            app.UseCookieAuthentication(new CookieAuthenticationOptions
-            {
-                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/Account/Login"),
-                Provider = new CookieAuthenticationProvider
-                {
-                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<UserManager, User>(
-                        validateInterval: TimeSpan.FromMinutes(30),
-                        regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
-                }
-            });            
+            //app.CreatePerOwinContext<SignInManager>(SignInManager.Create);
+            //app.UseCookieAuthentication(new CookieAuthenticationOptions
+            //{
+            //    AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
+            //    LoginPath = new PathString("/Account/Login"),
+            //    Provider = new CookieAuthenticationProvider
+            //    {
+            //        OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<UserManager, User>(
+            //            validateInterval: TimeSpan.FromMinutes(30),
+            //            regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
+            //    }
+            //});            
         }
     }
 }

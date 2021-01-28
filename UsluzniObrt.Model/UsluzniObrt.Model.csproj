@@ -84,6 +84,7 @@
     <Compile Include="Order\Order.cs" />
     <Compile Include="Order\OrderStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User\User.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

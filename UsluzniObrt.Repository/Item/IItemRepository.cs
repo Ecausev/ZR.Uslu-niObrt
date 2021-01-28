@@ -2,7 +2,7 @@
 
 namespace UsluzniObrt.Repository
 {
-    public interface IItemRepository : IRepository<Item>
+    public interface IMenuitemRepository : IRepository<MenuItem>
     {
     }
 }

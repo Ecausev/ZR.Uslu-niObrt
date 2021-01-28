@@ -9,7 +9,7 @@ namespace UsluzniObrt.Service
     public interface IUserService
     {
 
-        SignInStatus SignIn(SignIn signin);
+        //SignInStatus SignIn(SignIn signin);
         //IdentityResult ChangePassword(ChangePassword changePassword);
 
     }

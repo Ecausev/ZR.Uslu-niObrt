@@ -10,9 +10,9 @@ namespace UsluzniObrt.MVC.ViewModels
     {
         public List<ItemOrderList> itemOrderList = new List<ItemOrderList>();
 
-        public void AddItem(Item item, int qty)
+        public void AddItem(MenuItem item, int qty)
         {
-            ItemOrderList itemOnList = itemOrderList.Where(x => x.Item.ItemId == item.ItemId).FirstOrDefault();
+            ItemOrderList itemOnList = itemOrderList.Where(x => x.Item.Id == item.Id).FirstOrDefault();
 
             if (itemOnList == null)
             {
@@ -25,16 +25,16 @@ namespace UsluzniObrt.MVC.ViewModels
             }
 
         }
-        public void RemoveItem(Item item)
+        public void RemoveItem(MenuItem item)
         {
 
-            itemOrderList.RemoveAll(x => x.Item.ItemId == item.ItemId);
+            itemOrderList.RemoveAll(x => x.Item.Id == item.Id);
 
         }
-        public decimal Calculate()
-        {
-            return itemOrderList.Sum(x => x.Item.Cijena * x.Qty);
-        }
+        //public decimal Calculate()
+        //{
+        //    return itemOrderList.Sum(x => x.Item.Price * x.Qty);
+        //}
         public void Clear()
         {
             itemOrderList.Clear();
@@ -44,7 +44,7 @@ namespace UsluzniObrt.MVC.ViewModels
     }
     public class ItemOrderList
     {
-        public Item Item { get; set; }
+        public MenuItem Item { get; set; }
         public int Qty { get; set; }
     }
 }

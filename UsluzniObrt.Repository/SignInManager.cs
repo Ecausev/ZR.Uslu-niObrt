@@ -12,21 +12,21 @@ using UsluzniObrt.Model;
 
 namespace UsluzniObrt.Repository
 {
-    public class SignInManager : SignInManager<User, string>
-    {
-        public SignInManager(UserManager userManager, IAuthenticationManager authenticationManager)
-            : base(userManager, authenticationManager)
-        {
-        }
+    //public class SignInManager : SignInManager<user, string>
+    //{
+    //    public SignInManager(UserManager userManager, IAuthenticationManager authenticationManager)
+    //        : base(userManager, authenticationManager)
+    //    {
+    //    }
 
-        public override Task<ClaimsIdentity> CreateUserIdentityAsync(User user)
-        {
-            return user.GenerateUserIdentityAsync((UserManager)UserManager);
-        }
+    //    public override Task<ClaimsIdentity> CreateUserIdentityAsync(User user)
+    //    {
+    //        return user.GenerateUserIdentityAsync((UserManager)UserManager);
+    //    }
 
-        public static SignInManager Create(IdentityFactoryOptions<SignInManager> options, IOwinContext context)
-        {
-            return new SignInManager(context.GetUserManager<UserManager>(), context.Authentication);
-        }
-    }
+    //    public static SignInManager Create(IdentityFactoryOptions<SignInManager> options, IOwinContext context)
+    //    {
+    //        return new SignInManager(context.GetUserManager<UserManager>(), context.Authentication);
+    //    }
+    //}
 }

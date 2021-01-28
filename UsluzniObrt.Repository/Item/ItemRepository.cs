@@ -8,9 +8,9 @@ using UsluzniObrt.Model;
 
 namespace UsluzniObrt.Repository
 {
-    public class ItemRepository : BaseRepository<Item>, IItemRepository
+    public class MenuItemRepository : BaseRepository<MenuItem>, IMenuitemRepository
     {
-        public ItemRepository(DbContext context) : base(context)
+        public MenuItemRepository(DbContext context) : base(context)
         {
 
         }

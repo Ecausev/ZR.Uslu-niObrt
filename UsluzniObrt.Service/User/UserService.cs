@@ -11,26 +11,27 @@ namespace UsluzniObrt.Service
     {
         public UserManager _userManager { get; set; }
         public RoleManager _roleManager { get; set; }
-        public SignInManager _signInManager { get; set; }
+        //public SignInManager _signInManager { get; set; }
 
 
         public UserService()
         {
         }
 
-        public UserService(UserManager userManager, SignInManager signInManager, RoleManager roleManager/*, IRepository<User> repository*/)
-        {
-            _userManager = userManager;
-            _roleManager = roleManager;
-            _signInManager = signInManager;
+        //public UserService(UserManager userManager, SignInManager signInManager, RoleManager roleManager, IRepository<User> repository)
+        //{
+        //    _userManager = userManager;
+        //    _roleManager = roleManager;
+        //    _signInManager = signInManager;
 
-        }
+        //}
 
-        public SignInStatus SignIn(SignIn userSignIn)
-        {
 
-            return _signInManager.PasswordSignIn(userSignIn.Email, userSignIn.Password, userSignIn.RememberMe, shouldLockout: false);
-        }
+        //public SignInStatus SignIn(SignIn userSignIn)
+        //{
+
+        //    return _signInManager.PasswordSignIn(userSignIn.Email, userSignIn.Password, userSignIn.RememberMe, shouldLockout: false);
+        //}
 
         //public IdentityResult ChangePassword (ChangePassword changePassword)
         //{
