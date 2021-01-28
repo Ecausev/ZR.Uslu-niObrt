@@ -24,50 +24,7 @@ namespace UsluzniObrt.MVC.Controllers
             _menuService = menuService;
             _categoryService = categoryService;
         }
-        [HttpGet]
-        public ActionResult Index()
-        {
 
-            PopulateDropdownList();
-            var model = new ItemsViewModel();
-            model.Items = _menuService.GetAll();
-            return View(model);
-
-        }
-
-        [HttpGet]
-        public ActionResult Create()
-        {
-            PopulateDropdownList();
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Create(ItemCreateViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                PopulateDropdownList();
-                return View(model);
-            }
-            _menuService.Add(new MenuItem
-            {
-                CategoryId = model.CategoryId,
-                Name = model.Naziv,
-                Price = model.Cijena
-            });
-
-            return RedirectToAction("Index", "Order");
-
-        }
-
-        private void PopulateDropdownList()
-        {
-
-            ViewBag.CategoryList = _categoryService.GetAll().ToList();
-
-
-        }
 
         //[HttpGet]
         //public ActionResult Modify()

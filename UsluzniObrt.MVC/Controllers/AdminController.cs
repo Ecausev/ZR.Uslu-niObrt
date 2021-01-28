@@ -10,7 +10,7 @@ using UsluzniObrt.Repository;
 
 namespace UsluzniObrt.MVC.Controllers
 {
-    
+
     public class AdminController : Controller
     {
         private readonly IMenuService _menuService;
@@ -24,33 +24,23 @@ namespace UsluzniObrt.MVC.Controllers
             _categoryService = categoryService;
         }
 
-        
+
         // GET: Admin
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult CreateItem()
+        [HttpGet]
+        public ActionResult Create()
         {
             PopulateDropdownList();
             return View();
-
-        }
-
-        private void PopulateDropdownList()
-        {
-            
-            ViewBag.CategoryList = _categoryService.GetAll();
-            
-
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult CreateItem(ItemCreateViewModel model)
+        public ActionResult Create(ItemCreateViewModel model)
         {
-
             if (!ModelState.IsValid)
             {
                 PopulateDropdownList();
@@ -59,14 +49,19 @@ namespace UsluzniObrt.MVC.Controllers
             _menuService.Add(new MenuItem
             {
                 CategoryId = model.CategoryId,
-                Name = model.Naziv,
-                Price = model.Cijena
+                Name = model.Name,
+                Price = model.Price,
+                Description = model.Description,
+                Status = model.Status
             });
 
-             return RedirectToAction("Index", "Order");
-            
+            return RedirectToAction("Create", "Admin");
+
         }
 
-
+        private void PopulateDropdownList()
+        {
+            ViewBag.CategoryList = _categoryService.GetAll().ToList();
+        }
     }
 }

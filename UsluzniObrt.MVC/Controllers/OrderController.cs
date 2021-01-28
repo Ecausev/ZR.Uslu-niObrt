@@ -32,9 +32,8 @@ namespace UsluzniObrt.MVC.Controllers
 
         
         [HttpGet]
-        public ActionResult Menu(int OfficeId, int TableId)
+        public ActionResult Menu(int TableId)
         {
-            //PopulateViewBagOrder(OfficeId, TableId);
             PopulateDropdownList();
             var model = new ItemsViewModel();
             model.Items = _MenuService.GetAll();
@@ -75,7 +74,6 @@ namespace UsluzniObrt.MVC.Controllers
 
         private void PopulateDropdownList()
         {
-            //ViewBag.TableList = _officeService.GetAll().ToList();
             ViewBag.CategoryList = _categoryService.GetAll().ToList();
             
 

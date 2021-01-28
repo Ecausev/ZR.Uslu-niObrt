@@ -41,11 +41,9 @@ namespace UsluzniObrt.MVC.DependencyResolution {
             For<IUserStore<IdentityUser>>().Use<UserStore<IdentityUser>>();
             For<IRoleStore<IdentityRole, string>>().Use<RoleStore<IdentityRole>>();
             For<DbContext>().Use<UsluzniObrtDbContext>();
-
-            
-
             For<IUserService>().Use<UserService>();
             For<IUserRepository>().Use<UserRepository>();
+            For<IMenuService>().Use<MenuService>();
             For<IMenuitemRepository>().Use<MenuItemRepository>();
             For<ICategoryRepository>().Use<CategoryRepository>();
             For<ICategoryService>().Use<CategoryService>();

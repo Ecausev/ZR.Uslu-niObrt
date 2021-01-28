@@ -186,7 +186,7 @@
     <Compile Include="App_Start\StructuremapMvc.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\ItemController.cs" />
+    <Compile Include="Controllers\MenuItemController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="DependencyResolution\ControllerConvention.cs" />
     <Compile Include="DependencyResolution\DefaultRegistry.cs" />
@@ -353,9 +353,9 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Order\Menu.cshtml" />
-    <Content Include="Views\Admin\CreateItem.cshtml" />
-    <Content Include="Views\Item\Index.cshtml" />
-    <Content Include="Views\Item\Create.cshtml" />
+    <Content Include="Views\Admin\Create.cshtml" />
+    <Content Include="Views\MenuItem\Index.cshtml" />
+    <Content Include="Views\MenuItem\Create.cshtml" />
     <Content Include="Views\Order\Tables.cshtml" />
     <Content Include="Views\Order\CartIndex.cshtml" />
   </ItemGroup>
