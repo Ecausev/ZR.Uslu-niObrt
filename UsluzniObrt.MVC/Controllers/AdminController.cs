@@ -58,6 +58,27 @@ namespace UsluzniObrt.MVC.Controllers
             return RedirectToAction("Create", "Admin");
 
         }
+        //Ovdje ide logika za populate dropdownlist of items
+        //[HttpGet]
+        //public ActionResult Modify()
+        //{
+        //    return View();
+        //}
+
+
+        //[HttpPost]
+        //public ActionResult Modify(int )
+        //{
+
+        //    return View();
+
+        //}
+
+        [HttpGet]
+        public ActionResult Remove()
+        {
+            return View();
+        }
 
         private void PopulateDropdownList()
         {

@@ -5,33 +5,37 @@
 <body>
 
     @Html.AntiForgeryToken()
-
     @foreach (var s in ViewBag.CategoryList)
-    {
-        <p>
-            <button class="btn btn-primary btn-lg btn-block " data-toggle="collapse" href="#@s.Name" role="button" aria-expanded="false" aria-controls="@s.Name">@s.Name</button>
-            <div class="row justify-content-center">
-                <div class="col">
-                    <div class="collapse multi-collapse" id="@s.Name">
-                        <div class="card card-body">
-                            <table class="table table-bordered">
-                                <tbody>
-                                    @foreach (var item in Model.Items.Where(x => x.CategoryId == s.CategoryId))
-                                    {
-                                    <tr>
-                                        <td class="text-center text-capitalize">@item.Naziv</td>
-                                        <td class="text-center text-capitalize">@item.Cijena.ToString("0.00 Kn")</td>
-                                        <td class="text-center">@Html.ActionLink("Order", "AddToCart", new { id = item.ItemId }, new { @class = "btn btn-primary" })</td>
-                                    </tr>
-                                    }
-                                </tbody>
-                            </table>
+        {
+            <p>
+                <button class="btn btn-primary btn-lg btn-block " data-toggle="collapse" href="#ID_@s.Id" role="button" aria-expanded="false" aria-controls="ID_@s.Id">@s.Name</button>
+                <div class="row justify-content-center">
+                    <div class="col">
+                        <div class="collapse multi-collapse" id="ID_@s.Id">
+                            <div class="card card-body">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        @foreach (var item in Model.Items.Where(x => x.CategoryId == s.Id))
+                                        {
+                                            <tr>
+
+                                                <td class="text-center text-capitalize">@item.CategoryId</td>
+                                                <td class="text-center text-capitalize">@item.Name</td>
+                                                <td class="text-center text-capitalize">@item.Price.ToString("0.00 Kn")</td>
+                                                <td class="text-center text-capitalize">@item.Description</td>
+                                                <td class="text-center text-capitalize">@item.Status.ToString()</td>
+
+                                                <td class="text-center">@Html.ActionLink("Order", "AddToCart", new { id = item.Id }, new { @class = "btn btn-primary" })</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </p>
-    }
+            </p>
+        }
 </body>
 
 @*check status of last order for that table. if status == aktivan, id =

@@ -41,7 +41,7 @@ namespace UsluzniObrt.Service
 
         public List<MenuItem> GetAll()
         {
-            throw new NotImplementedException();
+            return _menuitemRepository.GetAll().ToList();
         }
 
         public MenuItem GetById(int id)
