@@ -28,7 +28,10 @@ namespace UsluzniObrt.MVC.Controllers
         // GET: Admin
         public ActionResult Index()
         {
-            return View();
+
+            var model = new ItemsViewModel();
+            model.Items = _menuService.GetAll();
+            return View(model);
         }
 
         [HttpGet]
@@ -58,16 +61,16 @@ namespace UsluzniObrt.MVC.Controllers
             return RedirectToAction("Create", "Admin");
 
         }
-        //Ovdje ide logika za populate dropdownlist of items
-        //[HttpGet]
-        //public ActionResult Modify()
-        //{
-        //    return View();
-        //}
+
+        [HttpGet]
+        public ActionResult Modify()
+        {
+            return View();
+        }
 
 
         //[HttpPost]
-        //public ActionResult Modify(int )
+        //public ActionResult Modify()
         //{
 
         //    return View();

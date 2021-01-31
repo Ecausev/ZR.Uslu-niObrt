@@ -36,7 +36,8 @@ namespace UsluzniObrt.Service
 
         public void edit(MenuItem item)
         {
-            throw new NotImplementedException();
+            _menuitemRepository.Update(item);
+            _menuitemRepository.Save();
         }
 
         public List<MenuItem> GetAll()

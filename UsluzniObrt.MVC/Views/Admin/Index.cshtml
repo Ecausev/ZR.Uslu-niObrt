@@ -1,7 +1,35 @@
-﻿
+﻿@model UsluzniObrt.MVC.ViewModels.ItemsViewModel
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
 
+<body>
+
+    @Html.AntiForgeryToken()
+    @foreach (var item in Model.Items)
+    {
+
+        <div class="row justify-content-center">
+            <div class="col">
+                <div class="collapse multi-collapse">
+                    <div class="card card-body">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td class="text-center text-capitalize">@item.Name</td>
+                                    <td class="text-center text-capitalize">@item.Price.ToString("0.00 Kn")</td>
+                                    <td class="text-center text-capitalize">@item.Description</td>
+                                    <td class="text-center text-capitalize">@item.Category</td>
+                                    <td class="text-center text-capitalize">@item.Status</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+</body>

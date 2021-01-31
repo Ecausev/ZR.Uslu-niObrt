@@ -49,16 +49,6 @@ namespace UsluzniObrt.MVC.Controllers
             return RedirectToAction("Checkout", "Order");
         }
 
-        //[HttpGet]
-        //[AllowAnonymous]
-        //public ActionResult AddToCart(int id)
-        //{
-        //    var item = _MenuService.GetById(id);
-        //    GetCart().AddItem(item, 1);
-        //    return RedirectToAction("Checkout", "Order");
-        //}
-
-
         public ViewResult Checkout()
         {
             return View(new CartIndexViewModel
