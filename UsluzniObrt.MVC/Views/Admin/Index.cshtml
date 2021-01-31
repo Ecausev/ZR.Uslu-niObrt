@@ -8,12 +8,10 @@
 <body>
 
     @Html.AntiForgeryToken()
-    @foreach (var item in Model.Items)
-    {
-
-        <div class="row justify-content-center">
-            <div class="col">
-                <div class="collapse multi-collapse">
+        @foreach (var item in Model.Items)
+        {
+            <div class="row justify-content-center">
+                <div class="col">
                     <div class="card card-body">
                         <table class="table table-bordered">
                             <tbody>
@@ -21,15 +19,48 @@
                                     <td class="text-center text-capitalize">@item.Name</td>
                                     <td class="text-center text-capitalize">@item.Price.ToString("0.00 Kn")</td>
                                     <td class="text-center text-capitalize">@item.Description</td>
-                                    <td class="text-center text-capitalize">@item.Category</td>
+                                    <td class="text-center text-capitalize">@item.Category.Name</td>
                                     <td class="text-center text-capitalize">@item.Status</td>
+                                    <td class="text-center text-capitalize">
+                                        <a data-toggle="modal" data-id="@item.Id"></a>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-        </div>
+        }
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.Partial("_ModifyPartial")
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
 
-    }
+        </div>
+    </div>
 </body>
+
+@*<script>
+    var departmentId = 0;
+    $("a[id$='manage-trigger']").on("click", function (event) {
+        event.preventDefault();
+        var depId = $(this).data("department-id");
+        $.ajax({
+            url: "ManageDepartment/" + depId,
+            type: "GET",
+        }).done(function (result) {
+            $("#ManageDepartmentContainer").html(result)
+            $("#ManageDepartment").modal("show")
+        });
+    });
+</script>*@

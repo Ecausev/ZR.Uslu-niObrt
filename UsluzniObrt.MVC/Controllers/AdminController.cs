@@ -26,9 +26,10 @@ namespace UsluzniObrt.MVC.Controllers
 
 
         // GET: Admin
+        [HttpGet]
         public ActionResult Index()
         {
-
+            PopulateDropdownList();
             var model = new ItemsViewModel();
             model.Items = _menuService.GetAll();
             return View(model);
@@ -58,24 +59,45 @@ namespace UsluzniObrt.MVC.Controllers
                 Status = model.Status
             });
 
-            return RedirectToAction("Create", "Admin");
+            return RedirectToAction("Index", "Admin");
 
         }
 
         [HttpGet]
-        public ActionResult Modify()
+        public ActionResult Modify(int id)
         {
-            return View();
+            var item = _menuService.GetById(id);
+            var model = new ItemViewModel
+            {
+                Name = item.Name,
+                Price = Convert.ToInt32(item.Price),
+                Description = item.Description,
+                Status = item.Status,
+                CategoryId = item.CategoryId
+
+            };
+            return PartialView("_ModifyPartial", model);
         }
 
 
-        //[HttpPost]
-        //public ActionResult Modify()
-        //{
+        [HttpPost]
+        public ActionResult Modify(ItemViewModel model)
+        {
+            var item = _menuService.GetById(model.Id);
+            item.CategoryId = model.CategoryId;
+            item.Name = model.Name;
+            item.Price = model.Price;
+            item.Description = model.Description;
+            item.Status = model.Status;
+            if (!ModelState.IsValid)
+            {
+                PopulateDropdownList();
+                return View(model);
+            }
+            _menuService.edit(item);
+            return RedirectToAction("Index");
 
-        //    return View();
-
-        //}
+        }
 
         [HttpGet]
         public ActionResult Remove()

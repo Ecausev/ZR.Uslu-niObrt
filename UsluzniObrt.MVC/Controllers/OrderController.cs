@@ -12,7 +12,7 @@ namespace UsluzniObrt.MVC.Controllers
 {
     public class OrderController : Controller
     {
-        private readonly IMenuService _MenuService;
+        private readonly IMenuService _menuService;
         private readonly ICategoryService _categoryService;
         private readonly IOrderService _orderService;
         // GET: Item
@@ -25,7 +25,7 @@ namespace UsluzniObrt.MVC.Controllers
             ICategoryService categoryService, 
             IOrderService orderService )
         {
-            _MenuService = itemService;
+            _menuService = itemService;
             _categoryService = categoryService;
             _orderService = orderService;
         }
@@ -37,14 +37,14 @@ namespace UsluzniObrt.MVC.Controllers
             PopulateDropdownList();
 
             var model = new ItemsViewModel();
-            model.Items = _MenuService.GetAll();
+            model.Items = _menuService.GetAll();
             return View(model);
         }
 
         [HttpGet]
         public ActionResult Cart(int id)
         {
-            var item = _MenuService.GetById(id);
+            var item = _menuService.GetById(id);
             GetCart().AddItem(item, 1);
             return RedirectToAction("Checkout", "Order");
         }
@@ -59,13 +59,13 @@ namespace UsluzniObrt.MVC.Controllers
 
         public ActionResult RemoveFromCart(int id)
         {
-            var item = _MenuService.GetById(id);
+            var item = _menuService.GetById(id);
             GetCart().RemoveItem(item);
             return RedirectToAction("Checkout", "Order");
         }
         public ActionResult RemoveOneFromCart(int id)
         {
-            var item = _MenuService.GetById(id);
+            var item = _menuService.GetById(id);
 
             GetCart().RemoveOne(item, 1);
             return RedirectToAction("Checkout", "Order");
