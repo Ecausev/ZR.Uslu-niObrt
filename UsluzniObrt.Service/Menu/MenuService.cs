@@ -46,7 +46,7 @@ namespace UsluzniObrt.Service
 
         public MenuItem GetById(int id)
         {
-            throw new NotImplementedException();
+            return _menuitemRepository.GetById(id);
         }
     }
 }

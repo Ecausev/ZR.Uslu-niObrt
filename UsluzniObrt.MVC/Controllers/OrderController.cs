@@ -41,6 +41,14 @@ namespace UsluzniObrt.MVC.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public ActionResult Cart(int id)
+        {
+            var item = _MenuService.GetById(id);
+            GetCart().AddItem(item, 1);
+            return RedirectToAction("Checkout", "Order");
+        }
+
         //[HttpGet]
         //[AllowAnonymous]
         //public ActionResult AddToCart(int id)
@@ -51,36 +59,43 @@ namespace UsluzniObrt.MVC.Controllers
         //}
 
 
-        //public ViewResult Checkout()
-        //{
-        //    return View(new CartIndexViewModel
-        //    {
-        //        Cart = GetCart()
-        //    });
-        //}
+        public ViewResult Checkout()
+        {
+            return View(new CartIndexViewModel
+            {
+                Cart = GetCart()
+            });
+        }
 
-        //public ActionResult RemoveFromCart( int id)
-        //{
-        //    var item = _MenuService.GetById(id);
-        //    GetCart().RemoveItem(item);
-        //    return RedirectToAction("Checkout", "Order");
-        //}
+        public ActionResult RemoveFromCart(int id)
+        {
+            var item = _MenuService.GetById(id);
+            GetCart().RemoveItem(item);
+            return RedirectToAction("Checkout", "Order");
+        }
+        public ActionResult RemoveOneFromCart(int id)
+        {
+            var item = _MenuService.GetById(id);
+
+            GetCart().RemoveOne(item, 1);
+            return RedirectToAction("Checkout", "Order");
+        }
 
         private void PopulateDropdownList()
         {
             ViewBag.CategoryList = _categoryService.GetAll().ToList();
 
         }
-        //private CartViewModel GetCart()
-        //{
-        //    CartViewModel cart = (CartViewModel)Session["CartViewModel"];
-        //    if (cart == null)
-        //    {
-        //        cart = new CartViewModel();
-        //        Session["CartViewModel"] = cart;
-        //    }
-        //    return cart;
-        //}
+        private CartViewModel GetCart()
+        {
+            CartViewModel cart = (CartViewModel)Session["CartViewModel"];
+            if (cart == null)
+            {
+                cart = new CartViewModel();
+                Session["CartViewModel"] = cart;
+            }
+            return cart;
+        }
 
         //public ActionResult CreateOrder(int officeId, int tableId, int itemId, int Qty)
         //{

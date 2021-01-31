@@ -31,10 +31,24 @@ namespace UsluzniObrt.MVC.ViewModels
             itemOrderList.RemoveAll(x => x.Item.Id == item.Id);
 
         }
-        //public decimal Calculate()
-        //{
-        //    return itemOrderList.Sum(x => x.Item.Price * x.Qty);
-        //}
+        public void RemoveOne(MenuItem item, int qty)
+        {
+            ItemOrderList itemOnList = itemOrderList.Where(x => x.Item.Id == item.Id).FirstOrDefault();
+
+            if (itemOnList.Qty == 1)
+            {
+                itemOrderList.RemoveAll(x => x.Item.Id == item.Id);
+            }
+            else
+            {
+                itemOnList.Qty -= qty;
+            }
+
+        }
+        public decimal Calculate()
+        {
+            return Convert.ToDecimal(itemOrderList.Sum(x => x.Item.Price * x.Qty));
+        }
         public void Clear()
         {
             itemOrderList.Clear();

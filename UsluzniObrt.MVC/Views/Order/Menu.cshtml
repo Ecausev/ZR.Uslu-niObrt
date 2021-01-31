@@ -1,6 +1,6 @@
 ﻿@model UsluzniObrt.MVC.ViewModels.ItemsViewModel
 @{
-    ViewBag.Title = "CreateItem";
+    ViewBag.Title = "Store Menu";
 }
 <body>
 
@@ -15,17 +15,17 @@
                             <div class="card card-body">
                                 <table class="table table-bordered">
                                     <tbody>
-                                        @foreach (var item in Model.Items.Where(x => x.CategoryId == s.Id))
+                                        @foreach (var item in Model.Items.Where(x => x.CategoryId == s.Id @*&& x.Status == 0*@))
                                         {
                                             <tr>
 
-                                                <td class="text-center text-capitalize">@item.CategoryId</td>
                                                 <td class="text-center text-capitalize">@item.Name</td>
                                                 <td class="text-center text-capitalize">@item.Price.ToString("0.00 Kn")</td>
                                                 <td class="text-center text-capitalize">@item.Description</td>
-                                                <td class="text-center text-capitalize">@item.Status.ToString()</td>
 
-                                                <td class="text-center">@Html.ActionLink("Order", "AddToCart", new { id = item.Id }, new { @class = "btn btn-primary" })</td>
+                                                <td class="text-right">
+                                                @Html.ActionLink("Add to order", "Cart", new { id = item.Id}, new { @class = "btn btn-primary" })
+                                                </td>
                                             </tr>
                                         }
                                     </tbody>
@@ -39,5 +39,6 @@
 </body>
 
 @*check status of last order for that table. if status == aktivan, id =
+
 
 Korištenje modala za kreiranje tablice narudžbe! *@
