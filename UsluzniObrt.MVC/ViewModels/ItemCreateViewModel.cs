@@ -13,6 +13,7 @@ namespace UsluzniObrt.MVC.ViewModels
         [DataType(DataType.Text)]
         public string Name { get; set; }
         [Required]
+        [Range(0,999)]
         public int Price { get; set; }
         [Required]
         [DataType(DataType.Text)]

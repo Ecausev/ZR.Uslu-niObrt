@@ -67,16 +67,7 @@ namespace UsluzniObrt.MVC.Controllers
         public ActionResult Modify(int id)
         {
             PopulateDropdownList();
-            var item = _menuService.GetById(id);
-            var model = new ItemViewModel
-            {
-                Name = item.Name,
-                Price = Convert.ToInt32(item.Price),
-                Description = item.Description,
-                Status = item.Status,
-                CategoryId = item.CategoryId
-
-            };
+            ViewBag.Item = _menuService.GetById(id);
             return View();
         }
 
@@ -84,17 +75,19 @@ namespace UsluzniObrt.MVC.Controllers
         [HttpPost]
         public ActionResult Modify(ItemViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                PopulateDropdownList();
+                return View();
+            }
+
             var item = _menuService.GetById(model.Id);
             item.CategoryId = model.CategoryId;
             item.Name = model.Name;
             item.Price = model.Price;
             item.Description = model.Description;
             item.Status = model.Status;
-            if (!ModelState.IsValid)
-            {
-                PopulateDropdownList();
-                return View(model);
-            }
+            
             _menuService.edit(item);
             return RedirectToAction("Index");
 
