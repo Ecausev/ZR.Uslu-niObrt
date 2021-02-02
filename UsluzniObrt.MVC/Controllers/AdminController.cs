@@ -66,6 +66,7 @@ namespace UsluzniObrt.MVC.Controllers
         [HttpGet]
         public ActionResult Modify(int id)
         {
+            PopulateDropdownList();
             var item = _menuService.GetById(id);
             var model = new ItemViewModel
             {
@@ -76,7 +77,7 @@ namespace UsluzniObrt.MVC.Controllers
                 CategoryId = item.CategoryId
 
             };
-            return PartialView("_ModifyPartial", model);
+            return View();
         }
 
 
