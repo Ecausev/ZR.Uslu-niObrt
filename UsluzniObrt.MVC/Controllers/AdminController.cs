@@ -20,7 +20,7 @@ namespace UsluzniObrt.MVC.Controllers
         }
         public AdminController(IMenuService menuService, ICategoryService categoryService)
         {
-            _menuService = menuService;
+            _menuService = menuService ;
             _categoryService = categoryService;
         }
 
