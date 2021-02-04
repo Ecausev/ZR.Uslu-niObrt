@@ -207,7 +207,6 @@
     <Compile Include="ViewModels\ItemViewModel.cs" />
     <Compile Include="ViewModels\OrdersViewModel.cs" />
     <Compile Include="ViewModels\OrderCreateViewModel.cs" />
-    <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -358,9 +357,10 @@
     <Content Include="Views\Order\Checkout.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Edit.cshtml" />
-    <Content Include="Views\Admin\_CategoryCreate.cshtml" />
+    <Content Include="Views\Admin\CategoryCreate.cshtml" />
     <Content Include="Views\Admin\Category.cshtml" />
     <Content Include="Views\Admin\CreateItem.cshtml" />
+    <Content Include="Views\Order\MyOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

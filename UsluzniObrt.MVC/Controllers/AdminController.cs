@@ -79,6 +79,15 @@ namespace UsluzniObrt.MVC.Controllers
 
         //}
 
+        //[HttpGet]
+        //public ActionResult Orders()
+        //{
+
+
+
+        //}
+
+
         [HttpGet]
         public ActionResult Edit(int id)
         {

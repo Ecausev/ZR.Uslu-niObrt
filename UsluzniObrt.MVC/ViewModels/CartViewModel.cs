@@ -8,20 +8,20 @@ namespace UsluzniObrt.MVC.ViewModels
 {
     public class CartViewModel
     {
-        public List<ItemOrderList> itemOrderList = new List<ItemOrderList>();
+        public List<OrderItemList> itemOrderList = new List<OrderItemList>();
 
         public void AddItem(MenuItem item, int qty)
         {
-            ItemOrderList itemOnList = itemOrderList.Where(x => x.Item.Id == item.Id).FirstOrDefault();
+            OrderItemList itemOnList = itemOrderList.Where(x => x.Item.Id == item.Id).FirstOrDefault();
 
             if (itemOnList == null)
             {
-                itemOrderList.Add(new ItemOrderList { Item = item, Qty = qty });
+                itemOrderList.Add(new OrderItemList { Item = item, Quantity = qty });
 
             }
             else
             {
-                itemOnList.Qty += qty;
+                itemOnList.Quantity += qty;
             }
 
         }
@@ -33,32 +33,32 @@ namespace UsluzniObrt.MVC.ViewModels
         }
         public void RemoveOne(MenuItem item, int qty)
         {
-            ItemOrderList itemOnList = itemOrderList.Where(x => x.Item.Id == item.Id).FirstOrDefault();
+            OrderItemList itemOnList = itemOrderList.Where(x => x.Item.Id == item.Id).FirstOrDefault();
 
-            if (itemOnList.Qty == 1)
+            if (itemOnList.Quantity == 1)
             {
                 itemOrderList.RemoveAll(x => x.Item.Id == item.Id);
             }
             else
             {
-                itemOnList.Qty -= qty;
+                itemOnList.Quantity -= qty;
             }
 
         }
         public decimal Calculate()
         {
-            return Convert.ToDecimal(itemOrderList.Sum(x => x.Item.Price * x.Qty));
+            return Convert.ToDecimal(itemOrderList.Sum(x => x.Item.Price * x.Quantity));
         }
         public void Clear()
         {
             itemOrderList.Clear();
         }
 
-        public IEnumerable<ItemOrderList> OrderList { get { return itemOrderList; } }
+        public IEnumerable<OrderItemList> OrderList { get { return itemOrderList; } }
     }
-    public class ItemOrderList
+    public class OrderItemList
     {
         public MenuItem Item { get; set; }
-        public int Qty { get; set; }
+        public int Quantity { get; set; }
     }
 }

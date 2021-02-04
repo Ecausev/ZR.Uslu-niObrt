@@ -24,7 +24,7 @@
                                     <p class="mb-0">
                                         @Html.ActionLink("-", "RemoveOneFromCart", new { id = item.Item.Id }, new { @class = "btn btn-danger" })
                                     </p>
-                                    <p class="mb-0">@item.Qty</p>
+                                    <p class="mb-0">@item.Quantity</p>
                                     <p class="mb-0">
                                         @Html.ActionLink("+", "Cart", new { id = item.Item.Id }, new { @class = "btn btn-success" })
                                     </p>
@@ -32,7 +32,7 @@
                                 </td>
                                 <td class="text-center text-capitalize">@item.Item.Name</td>
                                 <td class="text-center text-capitalize">
-                                    @((item.Qty * item.Item.Price).ToString("c"))
+                                    @((item.Quantity * item.Item.Price).ToString("c"))
                                 </td>
                                 <td>@Html.ActionLink("Remove", "RemoveFromCart", new { id = item.Item.Id }, new { @class = "btn btn-primary" })</td>
                             </tr>

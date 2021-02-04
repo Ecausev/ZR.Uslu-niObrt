@@ -32,7 +32,7 @@ namespace UsluzniObrt.MVC.Controllers
 
         
         [HttpGet]
-        public ActionResult Menu()
+        public ActionResult Menu(int id)
         {
             PopulateDropdownList();
 
@@ -56,6 +56,20 @@ namespace UsluzniObrt.MVC.Controllers
                 Cart = GetCart()
             });
         }
+
+        //public ActionResult Order(CartIndexViewModel model)
+        //{
+
+        //    _orderService.Add(new Order {
+
+        //        TableNumber = 1,
+        //        Date = DateTime.Now,
+        //        Status = OrderStatus.Pending,
+        //        Items = model.Cart.OrderItemList
+
+
+        //    })
+        //}
 
         public ActionResult RemoveFromCart(int id)
         {

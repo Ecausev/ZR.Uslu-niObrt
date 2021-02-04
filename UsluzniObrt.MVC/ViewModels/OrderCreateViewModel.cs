@@ -9,9 +9,9 @@ namespace UsluzniObrt.MVC.ViewModels
     {
         public int OrderID { get; set; }
 
-        public int ProizID { get; set; }
+        public int MenuItemId { get; set; }
 
-        public int Qty { get; set; }
+        public int Quantity { get; set; }
 
     }
 }
