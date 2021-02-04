@@ -3,45 +3,41 @@
     ViewBag.Title = "StoreMenu";
 }
 
-@using (Html.BeginForm("Modify", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Edit", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary("", new { @class = "text-danger" })
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.Id, new { @class = "col-md-3 control-label" })
-        <div class="col-md-9">
-            @Html.TextBoxFor(x => x.Id , new { @class = "form-control"})
-        </div>
-    </div>
+    //Napraviti Old Name - New Name
     <div class="form-group">
         @Html.LabelFor(m => m.Name, new { @class = "col-md-3 control-label" })
         <div class="col-md-9">
-            @Html.TextBox("Name", (string)ViewBag.Item.Name, new { @class = "form-control",  })
+            @Html.TextBoxFor(x => x.Name, new { Value = ViewBag.EditItem.Name , @class = "form-control"})
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Price, new { @class = "col-md-3 control-label" })
+        @Html.LabelFor(m => m.Price, new { @class = "col-md-9 control-label" })
         <div class="col-md-9">
-            @Html.TextBoxFor(Model => Model.Price, new { @class = "form-control" })
+            @Html.TextBoxFor(Model => Model.Price, new { Value = ViewBag.EditItem.Price, @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.CategoryId, new { @class = "control-label" })
         <div class="col-md-9">
-            @Html.TextBoxFor(Model => Model.CategoryId, new { @class = "form-control" })
+            @Html.DropDownListFor(x => x.CategoryId, new SelectList(ViewBag.CategoryList, "Id", "Name"))
+            @Html.ValidationMessageFor(m => m.CategoryId)
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Description, new { @class = "col-md-3 control-label" })
         <div class="col-md-9">
-            @Html.TextBoxFor(Model => Model.Description, new { @class = "form-control" })
+            @Html.TextBoxFor(Model => Model.Description, new { Value = ViewBag.EditItem.Description, @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Status, new { @class = "col-md-3 control-label" })
         <div class="col-md-9">
-            @Html.TextBoxFor(Model => Model.Status,new { @class = "form-control" })
+            @Html.EnumDropDownListFor(m => m.Status,  new { Value = ViewBag.EditItem.Status, @class = "form-control" })
         </div>
     </div>
     <div class="form-group">

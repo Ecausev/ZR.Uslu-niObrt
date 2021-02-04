@@ -1,49 +1,16 @@
 ﻿@model UsluzniObrt.MVC.ViewModels.ItemsViewModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Menu List";
 }
 
-<h2>Index</h2>
-
+<h2 class="text-center">Order Index</h2>
+@* Foreach item in order where status == Active 
+   koristiti ViewBag Ordera s itemima koji se nalaze u orderu da bi ih prikazao u card-body kao listu sa sumom 
+   Napraviti na bottom of card button za accept/reject order Order ako je order preuzet onda samo close *@
 <body>
 
-    @Html.AntiForgeryToken()
-        @foreach (var item in Model.Items)
-        {
-            <div class="row justify-content-center">
-                <div class="col">
-                    <div class="card card-body">
-                        <table class="table table-bordered">
-                            <tbody>
-                                <tr>
-                                    <td class="text-center text-capitalize">@item.Name</td>
-                                    <td class="text-center text-capitalize">@item.Price.ToString("0.00 Kn")</td>
-                                    <td class="text-center text-capitalize">@item.Description</td>
-                                    <td class="text-center text-capitalize">@item.Category.Name</td>
-                                    <td class="text-center text-capitalize">@item.Status</td>
-                                    <td class="text-center text-capitalize">
-                                        @Html.ActionLink("Modify", "Modify", new { id = item.Id }, new { @class = "btn btn-primary" })
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        }
+  
+    
+    
 </body>
 
-@*<script>
-    var departmentId = 0;
-    $("a[id$='manage-trigger']").on("click", function (event) {
-        event.preventDefault();
-        var depId = $(this).data("department-id");
-        $.ajax({
-            url: "ManageDepartment/" + depId,
-            type: "GET",
-        }).done(function (result) {
-            $("#ManageDepartmentContainer").html(result)
-            $("#ManageDepartment").modal("show")
-        });
-    });
-</script>*@

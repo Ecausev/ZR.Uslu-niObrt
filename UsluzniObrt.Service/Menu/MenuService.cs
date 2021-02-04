@@ -31,7 +31,8 @@ namespace UsluzniObrt.Service
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            _menuitemRepository.Delete(id);
+            _menuitemRepository.Save();
         }
 
         public void edit(MenuItem item)

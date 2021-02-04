@@ -11,7 +11,7 @@
         public float Price { get; set; }
         public MenuItemStatus Status { get; set; }
 
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
         public virtual Category Category { get; set; }
     }
 }

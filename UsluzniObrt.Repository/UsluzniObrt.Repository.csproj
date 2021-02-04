@@ -88,6 +88,10 @@
     <Compile Include="Migrations\202101281850039_2.Designer.cs">
       <DependentUpon>202101281850039_2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202102031513522_10.cs" />
+    <Compile Include="Migrations\202102031513522_10.Designer.cs">
+      <DependentUpon>202102031513522_10.cs</DependentUpon>
+    </Compile>
     <Compile Include="Order\IOrderItemRepository.cs" />
     <Compile Include="Order\IOrderRepository.cs" />
     <Compile Include="Order\OrderItemRepository.cs" />
@@ -119,6 +123,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202101281850039_2.resx">
       <DependentUpon>202101281850039_2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102031513522_10.resx">
+      <DependentUpon>202102031513522_10.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

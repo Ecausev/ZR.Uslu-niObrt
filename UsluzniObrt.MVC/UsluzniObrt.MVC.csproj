@@ -354,10 +354,13 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Order\Menu.cshtml" />
-    <Content Include="Views\Admin\Create.cshtml" />
+    <Content Include="Views\Admin\Menu.cshtml" />
     <Content Include="Views\Order\Checkout.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Admin\Modify.cshtml" />
+    <Content Include="Views\Admin\Edit.cshtml" />
+    <Content Include="Views\Admin\_CategoryCreate.cshtml" />
+    <Content Include="Views\Admin\Category.cshtml" />
+    <Content Include="Views\Admin\CreateItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

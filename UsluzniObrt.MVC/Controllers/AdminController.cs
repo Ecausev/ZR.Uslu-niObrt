@@ -24,10 +24,18 @@ namespace UsluzniObrt.MVC.Controllers
             _categoryService = categoryService;
         }
 
+        [HttpGet]
+
+        public ActionResult Index()
+        {
+            return View();
+
+
+        }
 
         // GET: Admin
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Menu()
         {
             PopulateDropdownList();
             var model = new ItemsViewModel();
@@ -36,14 +44,14 @@ namespace UsluzniObrt.MVC.Controllers
         }
 
         [HttpGet]
-        public ActionResult Create()
+        public ActionResult CreateItem()
         {
             PopulateDropdownList();
             return View();
         }
 
         [HttpPost]
-        public ActionResult Create(ItemCreateViewModel model)
+        public ActionResult CreateItem(ItemCreateViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -59,13 +67,22 @@ namespace UsluzniObrt.MVC.Controllers
                 Status = model.Status
             });
 
-            return RedirectToAction("Index", "Admin");
+            return RedirectToAction("Menu", "Admin");
 
         }
 
+        //[HttpGet]
+        //public ActionResult Category()
+        //{
+
+
+
+        //}
+
         [HttpGet]
-        public ActionResult Modify(int id)
+        public ActionResult Edit(int id)
         {
+            EditViewBag(id);
             PopulateDropdownList();
             ViewBag.Item = _menuService.GetById(id);
             return View();
@@ -73,7 +90,7 @@ namespace UsluzniObrt.MVC.Controllers
 
 
         [HttpPost]
-        public ActionResult Modify(ItemViewModel model)
+        public ActionResult Edit(ItemViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -93,15 +110,31 @@ namespace UsluzniObrt.MVC.Controllers
 
         }
 
-        [HttpGet]
-        public ActionResult Remove()
-        {
-            return View();
-        }
-
         private void PopulateDropdownList()
         {
             ViewBag.CategoryList = _categoryService.GetAll().ToList();
         }
+        private void EditViewBag(int id)
+        {
+            ViewBag.EditItem = _menuService.GetById(id);
+        }
+
+        [HttpGet]
+        public ActionResult DeleteItem (int id)
+        {
+
+            _menuService.Delete(id);
+            return RedirectToAction("Index");
+
+        }
+        [HttpGet]
+        public ActionResult DeleteCategory(int id)
+        {
+
+            _categoryService.Delete(id);
+            return RedirectToAction("Index");
+
+        }
+
     }
 }
