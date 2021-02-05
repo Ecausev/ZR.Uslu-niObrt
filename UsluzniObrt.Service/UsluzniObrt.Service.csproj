@@ -79,6 +79,8 @@
     <Compile Include="Category\ICategoryService.cs" />
     <Compile Include="Menu\IMenuService.cs" />
     <Compile Include="Menu\MenuService.cs" />
+    <Compile Include="Order\DTO\Cart.cs" />
+    <Compile Include="Order\DTO\OrderCreate.cs" />
     <Compile Include="Order\IOrderService.cs" />
     <Compile Include="Order\OrderService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

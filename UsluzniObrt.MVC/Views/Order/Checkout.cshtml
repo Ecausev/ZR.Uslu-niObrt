@@ -1,4 +1,4 @@
-﻿@model UsluzniObrt.MVC.ViewModels.CartIndexViewModel
+﻿@model UsluzniObrt.MVC.ViewModels.CartViewModel
 
 @{
     ViewBag.Title = "Your Cart";
@@ -22,27 +22,27 @@
                             <tr>
                                 <td class="text-center text-capitalize">
                                     <p class="mb-0">
-                                        @Html.ActionLink("-", "RemoveOneFromCart", new { id = item.Item.Id }, new { @class = "btn btn-danger" })
+                                        @Html.ActionLink("-", "RemoveOneFromCart", new { id = item.MenuItemId}, new { @class = "btn btn-danger" })
                                     </p>
                                     <p class="mb-0">@item.Quantity</p>
                                     <p class="mb-0">
-                                        @Html.ActionLink("+", "Cart", new { id = item.Item.Id }, new { @class = "btn btn-success" })
+                                        @Html.ActionLink("+", "Cart", new { id = item.MenuItemId }, new { @class = "btn btn-success" })
                                     </p>
 
                                 </td>
-                                <td class="text-center text-capitalize">@item.Item.Name</td>
                                 <td class="text-center text-capitalize">
-                                    @((item.Quantity * item.Item.Price).ToString("c"))
+                                    </td>
+                                <td class="text-center text-capitalize">
+                                    @*@((item.Quantity * item.MenuItem.Price).ToString("c"))*@
                                 </td>
-                                <td>@Html.ActionLink("Remove", "RemoveFromCart", new { id = item.Item.Id }, new { @class = "btn btn-primary" })</td>
+                                <td>@Html.ActionLink("Remove", "RemoveFromCart", new { id = item.MenuItemId }, new { @class = "btn btn-primary" })</td>
                             </tr>
                         }
                     </tbody>
                     <tfoot>
                         <tr>
                             <td colspan="2" class="text-right">Total:</td>
-                            <td class="text-right">@Model.Cart.Calculate().ToString("c")</td>
-                            <td>@Html.ActionLink("Create Order", "Menu", new { @class = "btn btn-primary" })</td>
+                            @*<td class="text-right">@Model.Cart.Calculate().ToString("c")</td>*@
                         </tr>
                     </tfoot>
                 </table>
@@ -51,7 +51,7 @@
                     @Html.ActionLink("Back To Menu", "Menu")
                 </div>
                 <div class="text-center">
-                    @Html.ActionLink("Create Order", "Menu")
+                    @Html.ActionLink("Create Order", "CreateOrder")
                 </div>
             </div>
         </div>

@@ -7,6 +7,7 @@ using UsluzniObrt.Repository;
 using UsluzniObrt.Model;
 using UsluzniObrt.MVC.ViewModels;
 using UsluzniObrt.Service;
+using UsluzniObrt.Service.DTO;
 
 namespace UsluzniObrt.MVC.Controllers
 {
@@ -51,24 +52,39 @@ namespace UsluzniObrt.MVC.Controllers
 
         public ViewResult Checkout()
         {
-            return View(new CartIndexViewModel
-            {
+            PopulateItems();
+            return View(new CartViewModel {
                 Cart = GetCart()
             });
         }
 
-        //public ActionResult Order(CartIndexViewModel model)
+
+        
+        //public ActionResult CreateOrder(CartIndexViewModel model)
         //{
+        //    var orderItems = new List<OrderItem>();
+        //    foreach (var orderItem in model.Cart.OrderList)
+        //    {
+        //        orderItems.Add(new OrderItem
+        //        {
+        //            MenuItemId = orderItem.Item.Id,
+        //            Quantity = orderItem.Qty
+        //        });
+        //    }
 
-        //    _orderService.Add(new Order {
-
-        //        TableNumber = 1,
+        //    var order = new Order
+        //    {
         //        Date = DateTime.Now,
+        //        TableNumber = 1,
         //        Status = OrderStatus.Pending,
-        //        Items = model.Cart.OrderItemList
+        //        Items = orderItems
+        //    };
 
+        //    _orderService.Add(order);
 
-        //    })
+        //    var orderId = order.Id; //for test
+
+        //    return View();
         //}
 
         public ActionResult RemoveFromCart(int id)
@@ -90,102 +106,23 @@ namespace UsluzniObrt.MVC.Controllers
             ViewBag.CategoryList = _categoryService.GetAll().ToList();
 
         }
-        private CartViewModel GetCart()
+
+        private void PopulateItems()
         {
-            CartViewModel cart = (CartViewModel)Session["CartViewModel"];
+            ViewBag.ItemList = _menuService.GetAll().ToList();
+
+        }
+        private Cart GetCart()
+        {
+            Cart cart = (Cart)Session["CartSession"];
             if (cart == null)
             {
-                cart = new CartViewModel();
-                Session["CartViewModel"] = cart;
+                cart = new Cart();
+                Session["CartSession"] = cart;
             }
             return cart;
         }
 
-        //public ActionResult CreateOrder(int officeId, int tableId, int itemId, int Qty)
-        //{
-
-        //    var newOrder = new Order
-        //    {
-        //        TableId = tableId
-        //    };
-        //    _orderService.Add(newOrder);
-
-        //    var LastOrder = _orderService.GetAll().Last();
-
-        //    var editOrder = new OrderItem
-        //    {
-        //        OrderId = LastOrder.OrderId,
-
-        //        ItemId = itemId,
-        //        Qty = Qty,
-        //    };
-
-        //    _orderItemService.Add(editOrder);
-
-        //    var officeTable = new OfficeTable
-        //    {
-        //        OfficeId = officeId,
-        //        TableId = tableId
-        //    };
-        //    _officeTableService.Add(officeTable);
-
-
-        //    return RedirectToAction("Index");
-
-        //}
-        // If list.contains x
-        // if last order with tableid = TableId && Order.status = "Active" - add cartorder to old else create new :S
-        // oce ta logika ici u create dio ? mislim da hoce.
-        // If Last Order contains item ID , qty =  qty + qty 
-
-
-
-
-
-
-
-        //public ActionResult Buy(string id)
-        //{
-        //    ProductModel productModel = new ProductModel();
-        //    if (Session["cart"] == null)
-        //    {
-        //        List<Item> cart = new List<Item>();
-        //        cart.Add(new Item { Product = productModel.find(id), Quantity = 1 });
-        //        Session["cart"] = cart;
-        //    }
-        //    else
-        //    {
-        //        List<Item> cart = (List<Item>)Session["cart"];
-        //        int index = isExist(id);
-        //        if (index != -1)
-        //        {
-        //            cart[index].Quantity++;
-        //        }
-        //        else
-        //        {
-        //            cart.Add(new Item { Product = productModel.find(id), Quantity = 1 });
-        //        }
-        //        Session["cart"] = cart;
-        //    }
-        //    return RedirectToAction("Index");
-        //}
-
-        //public ActionResult Remove(string id)
-        //{
-        //    List<Item> cart = (List<Item>)Session["cart"];
-        //    int index = isExist(id);
-        //    cart.RemoveAt(index);
-        //    Session["cart"] = cart;
-        //    return RedirectToAction("Index");
-        //}
-
-        //private int isExist(string id)
-        //{
-        //    List<Item> cart = (List<Item>)Session["cart"];
-        //    for (int i = 0; i < cart.Count; i++)
-        //        if (cart[i].Product.Id.Equals(id))
-        //            return i;
-        //    return -1;
-        //}
+        
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UsluzniObrt.Model;
 using UsluzniObrt.Repository;
+using UsluzniObrt.Service.DTO;
 
 namespace UsluzniObrt.Service
 {
@@ -22,15 +23,20 @@ namespace UsluzniObrt.Service
         {
             _orderRepository = orderRepository;
         }
-        public void Add(Order newOrder)
+        public void Add(Order order)
         {
-            var existingOrder = _orderRepository.GetAll().Any(x => x.TableNumber == newOrder.TableNumber && x.Status != OrderStatus.Completed);
+            var existingOrder = _orderRepository.GetAll().Any(x => x.TableNumber == order.TableNumber && x.Status != OrderStatus.Completed);
             if (existingOrder)
             {
                 //throw exception
             }
-            _orderRepository.Insert(newOrder);
-            _orderRepository.Save();
+            else
+            {
+                _orderRepository.Insert(order);
+                _orderRepository.Save();
+            }
+            
+            
         }
 
         public void Delete(int id)
