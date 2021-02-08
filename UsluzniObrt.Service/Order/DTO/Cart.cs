@@ -8,7 +8,7 @@ namespace UsluzniObrt.MVC.ViewModels
 {
     public class Cart
     {
-
+        public int Table;
         public List<OrderItem> itemOrderList = new List<OrderItem>();
         public void AddItem(MenuItem item, int qty)
         {
@@ -47,8 +47,8 @@ namespace UsluzniObrt.MVC.ViewModels
         }
         //public decimal Calculate()
         //{
-            
-        //    return Convert.ToDecimal(itemOrderList.Sum(x => x.Item.Price * x.Qty));
+
+        //    return Convert.ToDecimal(itemOrderList.Sum(x => x.MenuItem.Price * x.Quantity));
         //}
         public void Clear()
         {

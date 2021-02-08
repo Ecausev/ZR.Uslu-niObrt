@@ -24,7 +24,7 @@
                                                 <td class="text-center text-capitalize">@item.Description</td>
 
                                                 <td class="text-right">
-                                                @Html.ActionLink("Add to order", "Cart", new { id = item.Id}, new { @class = "btn btn-primary" })
+                                                @Html.ActionLink("Add to order", "Cart", new { id = item.Id, Table = ViewBag.Table}, new { @class = "btn btn-primary" })
                                                 </td>
                                             </tr>
                                         }

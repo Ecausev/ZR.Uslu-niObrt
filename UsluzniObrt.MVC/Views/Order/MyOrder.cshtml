@@ -1,7 +1,14 @@
-﻿
+﻿@model UsluzniObrt.MVC.ViewModels.OrdersViewModel
 @{
     ViewBag.Title = "MyOrder";
 }
 
-<h2>MyOrder</h2>
+<body>
+    @foreach (var item in Model.OrderItem)
+    {
+        @item.MenuItem.Name
+        @item.Quantity
+
+    }
+</body>
 

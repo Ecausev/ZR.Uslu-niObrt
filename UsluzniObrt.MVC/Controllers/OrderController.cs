@@ -36,83 +36,116 @@ namespace UsluzniObrt.MVC.Controllers
         public ActionResult Menu(int id)
         {
             PopulateDropdownList();
-
             var model = new ItemsViewModel();
             model.Items = _menuService.GetAll();
+            ViewBag.Table = id;
             return View(model);
         }
 
-        [HttpGet]
-        public ActionResult Cart(int id)
+        public ActionResult Cart(int id, int table)
         {
-            var item = _menuService.GetById(id);
-            GetCart().AddItem(item, 1);
-            return RedirectToAction("Checkout", "Order");
+            if (_orderService.CanPlaceOrder(table))
+            {
+                var item = _menuService.GetById(id);
+                GetCart().AddItem(item, 1);
+                GetCart().Table = table;
+                return RedirectToAction("Checkout", "Order");
+            }
+            else
+            {
+                return RedirectToAction("MyOrder", "Order", new { id = table });
+            }
         }
-
-        public ViewResult Checkout()
-        {
-            PopulateItems();
-            return View(new CartViewModel {
-                Cart = GetCart()
-            });
-        }
-
-
-        
-        //public ActionResult CreateOrder(CartIndexViewModel model)
-        //{
-        //    var orderItems = new List<OrderItem>();
-        //    foreach (var orderItem in model.Cart.OrderList)
-        //    {
-        //        orderItems.Add(new OrderItem
-        //        {
-        //            MenuItemId = orderItem.Item.Id,
-        //            Quantity = orderItem.Qty
-        //        });
-        //    }
-
-        //    var order = new Order
-        //    {
-        //        Date = DateTime.Now,
-        //        TableNumber = 1,
-        //        Status = OrderStatus.Pending,
-        //        Items = orderItems
-        //    };
-
-        //    _orderService.Add(order);
-
-        //    var orderId = order.Id; //for test
-
-        //    return View();
-        //}
 
         public ActionResult RemoveFromCart(int id)
         {
             var item = _menuService.GetById(id);
             GetCart().RemoveItem(item);
-            return RedirectToAction("Checkout", "Order");
+            return RedirectToAction("Checkout");
         }
         public ActionResult RemoveOneFromCart(int id)
         {
             var item = _menuService.GetById(id);
-
             GetCart().RemoveOne(item, 1);
-            return RedirectToAction("Checkout", "Order");
+            return RedirectToAction("Checkout");
         }
 
+        [HttpGet]
+        public ActionResult Checkout()
+        {
+            var ItemList = _menuService.GetAll().ToList();
+            return View(new CartViewModel {
+                Cart = GetCart(),
+                MenuItemList = ItemList,
+            });
+        }
+
+        public ActionResult CreateOrder(CartViewModel model)
+        {
+            
+            Cart cart = (Cart)Session["CartSession"];
+            Order MyOrder = new Order();
+
+            int table = cart.Table;
+            var orderItems = new List<OrderItem>();
+            foreach (var item in cart.OrderList)
+            {
+
+                orderItems.Add(new OrderItem
+                {
+                    MenuItemId = item.MenuItemId,
+                    Quantity = item.Quantity
+                });
+            }
+
+
+            var order = new Order
+            {
+                Date = DateTime.Now,
+                TableNumber = table,
+                Status = OrderStatus.Pending,
+                Items = orderItems
+            };
+
+            _orderService.Add(order);
+            Session.Remove("CartSession");
+            return RedirectToAction("MyOrder","Order", new {id = table });
+        }
+        /// <summary>
+        /// Stranica za pregled narudzbe lkvnmsklgskjgnvvn 
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult MyOrder (int id)
+        {
+            Order myOrder = new Order();
+            myOrder = _orderService.GetAll().Where(x => x.TableNumber == id).FirstOrDefault();
+            
+            return View(new OrdersViewModel {
+
+                Order = myOrder,
+                OrderItem = myOrder.Items.ToList()
+
+            });
+
+        }
+        
         private void PopulateDropdownList()
         {
             ViewBag.CategoryList = _categoryService.GetAll().ToList();
 
         }
-
-        private void PopulateItems()
+        public Order GetOrderStatus(int id)
         {
-            ViewBag.ItemList = _menuService.GetAll().ToList();
-
+            Order myOrder = new Order();
+            myOrder = _orderService.GetAll().Where(x => x.TableNumber == id && x.Status == OrderStatus.InProgress || x.Status == OrderStatus.Pending).FirstOrDefault();
+            return myOrder;
         }
-        private Cart GetCart()
+
+
+        public Cart GetCart()
         {
             Cart cart = (Cart)Session["CartSession"];
             if (cart == null)

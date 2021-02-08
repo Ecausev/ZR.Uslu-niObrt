@@ -6,8 +6,8 @@ using UsluzniObrt.Model;
 
 namespace UsluzniObrt.MVC.ViewModels
 {
-    public class OrderCreateViewModel
+    public class OrderViewModel
     {
-       
+        public List<OrderItem> itemOrderList = new List<OrderItem>();
     }
 }

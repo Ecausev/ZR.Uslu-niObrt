@@ -11,5 +11,6 @@ namespace UsluzniObrt.Service
         void Delete(int id);
         void edit(Order item);
         Order GetById(int id);
+        bool CanPlaceOrder(int id);
     }
 }

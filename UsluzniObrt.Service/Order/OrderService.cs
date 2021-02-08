@@ -25,16 +25,8 @@ namespace UsluzniObrt.Service
         }
         public void Add(Order order)
         {
-            var existingOrder = _orderRepository.GetAll().Any(x => x.TableNumber == order.TableNumber && x.Status != OrderStatus.Completed);
-            if (existingOrder)
-            {
-                //throw exception
-            }
-            else
-            {
                 _orderRepository.Insert(order);
                 _orderRepository.Save();
-            }
             
             
         }
@@ -59,6 +51,11 @@ namespace UsluzniObrt.Service
         public Order GetById(int id)
         {
             return _orderRepository.GetById(id);
+        }
+
+        public bool CanPlaceOrder(int tableNumber)
+        {
+            return !_orderRepository.GetAll().Any(x => x.TableNumber == tableNumber && (x.Status == OrderStatus.InProgress || x.Status == OrderStatus.Pending));
         }
     }
 }
