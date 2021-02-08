@@ -1,14 +1,42 @@
 ﻿@model UsluzniObrt.MVC.ViewModels.OrdersViewModel
 @{
     ViewBag.Title = "MyOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<body>
-    @foreach (var item in Model.OrderItem)
-    {
-        @item.MenuItem.Name
-        @item.Quantity
+    <div class="container-fluid">
+        <div class="row position-relative">
 
-    }
-</body>
+            <div class="card text-center mx-auto">
+                <div class="card-header">
+
+                    
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Proizvodi</h5>
+                    <p class="card-text">
+
+                        @foreach (var item in Model.OrderItem)
+                        {
+
+                            <table>
+                                <tr>
+                                    <td> Naziv Proizvoda @item.MenuItem.Name</td>
+                                </tr>
+                                <tr>
+                                    <td>Količina @item.Quantity</td>
+                                </tr>
+                            </table>
+                            
+                        }
+                    </p>
+                </div>
+                <div class="card-footer text-muted">
+                    Order Status
+                </div>
+            </div>
+        </div>
+
+    </div>
+
 
