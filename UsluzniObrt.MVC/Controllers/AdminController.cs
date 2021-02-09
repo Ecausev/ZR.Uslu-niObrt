@@ -15,25 +15,28 @@ namespace UsluzniObrt.MVC.Controllers
     {
         private readonly IMenuService _menuService;
         private readonly ICategoryService _categoryService;
+        private readonly IOrderService _orderService;
         public AdminController()
         {
         }
-        public AdminController(IMenuService menuService, ICategoryService categoryService)
+        public AdminController(IMenuService menuService, ICategoryService categoryService, IOrderService orderService)
         {
             _menuService = menuService ;
             _categoryService = categoryService;
+            _orderService = orderService;
         }
 
         [HttpGet]
-
         public ActionResult Index()
         {
-            return View();
-
+            Order OrderList = new Order();
+            OrderList = _orderService.GetAll().Where(x => x.Status == OrderStatus.Pending || x.Status == OrderStatus.InProgress).FirstOrDefault();
+            PopulateOrders();
+            return View(new OrdersViewModel {
+                OrderItem = OrderList.Items.ToList()
+            });
 
         }
-
-        // GET: Admin
         [HttpGet]
         public ActionResult Menu()
         {
@@ -70,7 +73,6 @@ namespace UsluzniObrt.MVC.Controllers
             return RedirectToAction("Menu", "Admin");
 
         }
-
         //[HttpGet]
         //public ActionResult Category()
         //{
@@ -78,16 +80,6 @@ namespace UsluzniObrt.MVC.Controllers
 
 
         //}
-
-        //[HttpGet]
-        //public ActionResult Orders()
-        //{
-
-
-
-        //}
-
-
         [HttpGet]
         public ActionResult Edit(int id)
         {
@@ -126,6 +118,11 @@ namespace UsluzniObrt.MVC.Controllers
         private void EditViewBag(int id)
         {
             ViewBag.EditItem = _menuService.GetById(id);
+        }
+
+        private void PopulateOrders()
+        {
+            ViewBag.OrdersList = _orderService.GetAll();
         }
 
         [HttpGet]

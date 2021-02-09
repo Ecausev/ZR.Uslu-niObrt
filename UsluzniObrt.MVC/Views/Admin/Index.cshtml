@@ -1,39 +1,30 @@
-﻿@model UsluzniObrt.MVC.ViewModels.ItemsViewModel
-@{
+﻿@model UsluzniObrt.MVC.ViewModels.OrderViewModel
     ViewBag.Title = "Menu List";
 }
 
 <h2 class="text-center">Order Index</h2>
-@* Foreach item in order where status == Active 
-   koristiti ViewBag Ordera s itemima koji se nalaze u orderu da bi ih prikazao u card-body kao listu sa sumom 
-   Napraviti na bottom of card button za accept/reject order Order ako je order preuzet onda samo close *@
+@* Foreach item in order where status == Active
+    koristiti ViewBag Ordera s itemima koji se nalaze u orderu da bi ih prikazao u card-body kao listu sa sumom
+    Napraviti na bottom of card button za accept/reject order Order ako je order preuzet onda samo close *@
 <body>
 
     <div class="container-fluid">
-        
+
         <div class="row">
-            
+
             <div class="col">
-                
-                @*@foreach (var item in collection.where())
+
+                @foreach (var item in ViewBag.OrdersList)
                 {
+                }
 
-                }*@
-                <div class="card">
-                    
-                    <div class="card-body">
-
-
-                    </div>
-
-                </div>
 
             </div>
 
         </div>
 
     </div>
-    
-    
+
+
 </body>
 

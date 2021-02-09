@@ -131,7 +131,6 @@ namespace UsluzniObrt.MVC.Controllers
             });
 
         }
-        
         private void PopulateDropdownList()
         {
             ViewBag.CategoryList = _categoryService.GetAll().ToList();
@@ -143,8 +142,6 @@ namespace UsluzniObrt.MVC.Controllers
             myOrder = _orderService.GetAll().Where(x => x.TableNumber == id && x.Status == OrderStatus.InProgress || x.Status == OrderStatus.Pending).FirstOrDefault();
             return myOrder;
         }
-
-
         public Cart GetCart()
         {
             Cart cart = (Cart)Session["CartSession"];
@@ -155,7 +152,5 @@ namespace UsluzniObrt.MVC.Controllers
             }
             return cart;
         }
-
-        
     }
 }
