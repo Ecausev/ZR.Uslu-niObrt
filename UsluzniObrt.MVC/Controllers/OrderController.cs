@@ -126,7 +126,7 @@ namespace UsluzniObrt.MVC.Controllers
             return View(new OrdersViewModel {
 
                 Order = myOrder,
-                OrderItem = myOrder.Items.ToList()
+                itemOrderList = myOrder.Items.ToList()
 
             });
 
@@ -136,12 +136,7 @@ namespace UsluzniObrt.MVC.Controllers
             ViewBag.CategoryList = _categoryService.GetAll().ToList();
 
         }
-        public Order GetOrderStatus(int id)
-        {
-            Order myOrder = new Order();
-            myOrder = _orderService.GetAll().Where(x => x.TableNumber == id && x.Status == OrderStatus.InProgress || x.Status == OrderStatus.Pending).FirstOrDefault();
-            return myOrder;
-        }
+
         public Cart GetCart()
         {
             Cart cart = (Cart)Session["CartSession"];

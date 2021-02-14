@@ -1,30 +1,49 @@
-﻿@model UsluzniObrt.MVC.ViewModels.OrderViewModel
-    ViewBag.Title = "Menu List";
-}
+﻿@model UsluzniObrt.MVC.ViewModels.OrdersViewModel
+
 
 <h2 class="text-center">Order Index</h2>
 @* Foreach item in order where status == Active
     koristiti ViewBag Ordera s itemima koji se nalaze u orderu da bi ih prikazao u card-body kao listu sa sumom
     Napraviti na bottom of card button za accept/reject order Order ako je order preuzet onda samo close *@
 <body>
-
     <div class="container-fluid">
+        <div class="row position-relative">
+            @foreach (var order in Model.OrderList.Where(x => x.Status == UsluzniObrt.Model.OrderStatus.InProgress || x.Status == UsluzniObrt.Model.OrderStatus.Pending))
+            {
+                <div class="card text-center mx-auto">
+                    <div class="card-header">
+                        <h2>@order.TableNumber</h2>
 
-        <div class="row">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Proizvodi</h5>
+                        <p class="card-text">
 
-            <div class="col">
+                            @foreach (var item in order.Items)
+                            {
 
-                @foreach (var item in ViewBag.OrdersList)
-                {
-                }
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <h3>Naziv Proizvoda</h3> @item.MenuItem.Name</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Količina @item.Quantity</td>
+                                    </tr>
+                                </table>
 
-
-            </div>
-
+                            }
+                        </p>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <h8>
+                            @Html.EnumDropDownListFor(m => m.Order.Status, new { @class = "form-control"} )
+      
+                        </h8>
+                    </div>
+                </div>
+            }
         </div>
-
     </div>
-
-
 </body>
 

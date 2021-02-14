@@ -6,10 +6,9 @@ using UsluzniObrt.Model;
 
 namespace UsluzniObrt.MVC.ViewModels
 {
-    public class OrdersViewModel
+    public class OrdersViewModel : OrderViewModel
     {
         public Order Order { get; set; }
-        public List<OrderItem> OrderItem { get; set; }
     }
 
 }

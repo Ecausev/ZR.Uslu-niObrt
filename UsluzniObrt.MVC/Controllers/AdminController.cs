@@ -29,11 +29,11 @@ namespace UsluzniObrt.MVC.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            Order OrderList = new Order();
-            OrderList = _orderService.GetAll().Where(x => x.Status == OrderStatus.Pending || x.Status == OrderStatus.InProgress).FirstOrDefault();
-            PopulateOrders();
+             List<Order> OrderList = new List<Order>();
+            OrderList = _orderService.GetAll();
             return View(new OrdersViewModel {
-                OrderItem = OrderList.Items.ToList()
+                OrderList = OrderList,
+                
             });
 
         }
@@ -120,10 +120,11 @@ namespace UsluzniObrt.MVC.Controllers
             ViewBag.EditItem = _menuService.GetById(id);
         }
 
-        private void PopulateOrders()
-        {
-            ViewBag.OrdersList = _orderService.GetAll();
-        }
+        //private IEnumerable<Order> PopulateOrders()
+        //{
+        //    ViewBag.OrdersList = _orderService.GetAll();
+        //    return 
+        //}
 
         [HttpGet]
         public ActionResult DeleteItem (int id)
