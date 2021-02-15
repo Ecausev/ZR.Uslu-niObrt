@@ -73,6 +73,13 @@ namespace UsluzniObrt.MVC.Controllers
             return RedirectToAction("Menu", "Admin");
 
         }
+
+        /// <summary>
+        /// TODO Category
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+
         //[HttpGet]
         //public ActionResult Category()
         //{
@@ -107,6 +114,21 @@ namespace UsluzniObrt.MVC.Controllers
             item.Status = model.Status;
             
             _menuService.edit(item);
+            return RedirectToAction("Index");
+
+        }
+
+        [HttpPost]
+        public ActionResult EditOrder(OrdersViewModel model)
+        {
+
+            Order order = new Order();
+            order.Id = model.Order.Id;
+            order.Status = model.Order.Status;
+            order.Date = DateTime.Now;
+            order.TableNumber = model.Order.TableNumber;
+
+            _orderService.edit(order);
             return RedirectToAction("Index");
 
         }

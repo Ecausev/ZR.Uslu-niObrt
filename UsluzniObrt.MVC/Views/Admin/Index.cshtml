@@ -36,10 +36,16 @@
                         </p>
                     </div>
                     <div class="card-footer text-muted">
+                        @using (Html.BeginForm("EditOrder", "Admin", FormMethod.Post))
+                        {
                         <h8>
-                            @Html.EnumDropDownListFor(m => m.Order.Status, new { @class = "form-control"} )
-      
+                            @Html.TextBoxFor(m => m.Order.Id, new { Value = order.Id, style = "display: none;" })
+                            @Html.TextBoxFor(m => m.Order.TableNumber, new { Value = order.TableNumber, style = "display: none;" })
+                            @Html.EnumDropDownListFor(m => m.Order.Status, new {Value = order.Status, @class = "form-control" })
+                            <input type="submit" name="submit" value="Submit" />
+
                         </h8>
+                        }
                     </div>
                 </div>
             }
