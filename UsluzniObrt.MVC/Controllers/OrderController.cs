@@ -53,7 +53,7 @@ namespace UsluzniObrt.MVC.Controllers
             }
             else
             {
-                return RedirectToAction("MyOrder", "Order", new { id = table });
+                return RedirectToAction("MyOrder", "Order", new { Id = table });
             }
         }
 
@@ -109,9 +109,10 @@ namespace UsluzniObrt.MVC.Controllers
 
             _orderService.Add(order);
             Session.Remove("CartSession");
-            return RedirectToAction("MyOrder","Order", new {id = table });
+            return RedirectToAction("MyOrder","Order", new {Id = table });
         }
         /// <summary>
+        /// 
         /// Stranica za pregled narudzbe lkvnmsklgskjgnvvn 
         /// 
         /// </summary>
@@ -121,8 +122,12 @@ namespace UsluzniObrt.MVC.Controllers
         public ActionResult MyOrder (int id)
         {
             Order myOrder = new Order();
-            myOrder = _orderService.GetAll().Where(x => x.TableNumber == id).FirstOrDefault();
-            
+            myOrder = _orderService.GetAll().Where(x => x.TableNumber == id && (x.Status == OrderStatus.InProgress || x.Status == OrderStatus.Pending)).FirstOrDefault();
+
+            if (myOrder == null)
+            {
+                return RedirectToAction("Menu", new {Id = id });
+            }
             return View(new OrdersViewModel {
 
                 Order = myOrder,
